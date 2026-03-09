@@ -1,0 +1,9 @@
+{
+  "architecture": "EfficientNetB3",
+  "input_size": [300, 300, 3],
+  "num_classes": 38,
+  "preprocessing": "efficientnet.preprocess_input",
+  "val_accuracy": 0.965,
+  "training_platform": "Google Colab T4 GPU",
+  "framework": "TensorFlow 2.15 / Keras 3"
+}

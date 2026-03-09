@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+venv/
+env/
+
+# Data & Models (Too large for GitHub)
+# ⚠️ plant_disease_model.keras is excluded due to file size (~45MB)
+# To get the model: train using notebooks/train_efficientnetb3.ipynb on Google Colab
+models/*.h5
+models/*.keras
+*.h5
+dataset/
+data/
+
+# OS
+.DS_Store
+Thumbs.db
