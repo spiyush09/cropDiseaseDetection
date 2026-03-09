@@ -1,136 +1,115 @@
-# 🌿 Crop Disease Detection System
+# 🌿 Crop Doctor — AI-Powered Plant Disease Detection
 
-An end-to-end Deep Learning application that detects diseases in crop leaves using Computer Vision and Transfer Learning.
-
-> **Major Project — B.Tech, Parul University**
+> Upload a leaf photo. Get a diagnosis. That's it.
 
 ---
 
-## Overview
+## What is this?
 
-This project uses **EfficientNetB3** (pretrained on ImageNet) to classify leaf images into **38 disease categories** across **14 crop species**. The model was trained on the **PlantVillage Dataset** (~87,000 images) using Google Colab and is served through a **Streamlit** web application for real-time inference.
+Crop Doctor is a web app that detects diseases in crop leaves using a deep learning model. You take a photo of a leaf, upload it, and the model tells you what's wrong (or if everything looks fine). It was built as part of our final year project to explore how computer vision can actually be useful in agriculture.
 
-**Achieved Validation Accuracy: 96.50%**
-
----
-
-## Technology Stack
-
-| Component | Technology |
-|---|---|
-| Deep Learning Model | EfficientNetB3 (Transfer Learning) |
-| Framework | TensorFlow 2.15, Keras 3 |
-| Data Processing | NumPy, Pillow, scikit-learn |
-| Web Interface | Streamlit |
-| Training Platform | Google Colab (T4 GPU) |
-| Inference Platform | Local CPU |
+The app covers **14 crops** and **38 disease classes** — including healthy variants — trained on the well-known PlantVillage dataset.
 
 ---
 
-## Project Structure
+## How we built the model
 
-```
-CropDiseaseDetection/
-├── notebooks/
-│   └── train_efficientnetb3.ipynb   # Full training notebook (Colab)
-├── models/
-│   ├── plant_disease_model.keras    # Trained model weights (not in repo — see below)
-│   ├── class_indices.json           # Class ID → Disease name mapping
-│   └── model_metadata.json          # Model configuration and accuracy info
-├── documentation/
-│   └── TECHNICAL_REPORT.md          # Detailed technical documentation
-├── app.py                           # Streamlit web application
-├── predict.py                       # Command-line prediction script
-├── requirements.txt                 # Python dependencies
-└── README.md                        # This file
-```
+We didn't train from scratch. That would've taken forever and honestly wouldn't have been as good. Instead, we used **transfer learning** — which means we took a model that was already trained on millions of images (ImageNet) and fine-tuned it for our specific problem.
 
----
+### The base model: EfficientNetB3
 
-## ⚠️ Model File
+We went with **EfficientNetB3** from the EfficientNet family. The reason we picked this over something like VGG16 or ResNet50 is that EfficientNet scales depth, width, and resolution together in a principled way — so you get better accuracy without just throwing more parameters at the problem. B3 specifically hits a sweet spot between size and performance.
 
-The trained model (`plant_disease_model.keras`, ~45MB) is **not included in this repository** due to file size limits.
+### Transfer learning approach
 
-To get the model:
-- **Option A:** Train it yourself using `notebooks/train_efficientnetb3.ipynb` on Google Colab (~30–40 min with T4 GPU)
-- **Option B:** Download from the project submission folder (shared separately)
+The process looked roughly like this:
 
-Place the downloaded file at: `models/plant_disease_model.keras`
+1. **Load EfficientNetB3** pretrained on ImageNet, without the top classification layer
+2. **Freeze the base** — we didn't want to mess with the features it already learned (edges, textures, shapes — all useful for leaves too)
+3. **Add our own head** — GlobalAveragePooling → Dropout → Dense(38, softmax)
+4. **Train phase 1** — only our new layers trained, base frozen
+5. **Fine-tune phase 2** — unfroze the top layers of the base and trained with a much lower learning rate so we didn't destroy the pretrained weights
+
+This two-phase approach is pretty standard for transfer learning and it worked well here. The idea is that ImageNet features are surprisingly good for plant leaves too — the model already knows how to detect textures, spots, and color patterns, which is basically what disease detection needs.
+
+### Preprocessing
+
+Images were resized to **300×300** (EfficientNetB3's native input size) and passed through `efficientnet.preprocess_input` which scales pixel values the way the model expects. We also used data augmentation during training — flips, rotations, zoom, brightness shifts — to make the model more robust to different lighting and angles.
 
 ---
 
-## How to Run
+## Dataset
 
-### 1. Clone the repository
+**PlantVillage** — a publicly available dataset of ~87,000 leaf images across 38 classes (disease + healthy combinations). Images are lab-controlled close-ups of single leaves, which is why the app works best with similar photos.
+
+| Stat | Value |
+|------|-------|
+| Total images | ~87,000 |
+| Classes | 38 |
+| Crops covered | 14 |
+| Split | 80% train / 20% val |
+
+---
+
+## Results
+
+The model hit **96.5% validation accuracy** after fine-tuning. Honestly better than we expected. Performance drops on real-world photos that look nothing like the training data — cluttered backgrounds, bad lighting, whole-plant shots — which is a known limitation of models trained on controlled datasets.
+
+---
+
+## Tech stack
+
+| Layer | What we used |
+|-------|-------------|
+| Model | EfficientNetB3 (Keras / TensorFlow) |
+| App | Streamlit |
+| Image processing | PIL, NumPy |
+| Training | Google Colab (T4 GPU) |
+
+---
+
+## Running it locally
+
 ```bash
-git clone <repo-url>
-cd CropDiseaseDetection
-```
-
-### 2. Set up environment (Anaconda recommended)
-```bash
-conda create -n cropenv python=3.10
-conda activate cropenv
+git clone https://github.com/yourusername/crop-doctor
+cd crop-doctor
 pip install -r requirements.txt
-```
-
-### 3. Add the model file
-Place `plant_disease_model.keras` inside the `models/` folder.
-
-### 4. Run the web app
-```bash
 streamlit run app.py
 ```
-Opens at `http://localhost:8501`
 
-### 5. (Optional) Run command-line prediction
-```bash
-python predict.py path/to/leaf_image.jpg
+Make sure the `models/` folder has:
+- `plant_disease_model.keras`
+- `class_indices.json`
+- `model_metadata.json`
+
+---
+
+## Project structure
+
+```
+crop-doctor/
+├── app.py                  # Streamlit frontend
+├── models/
+│   ├── plant_disease_model.keras
+│   ├── class_indices.json
+│   └── model_metadata.json
+├── requirements.txt
+└── README.md
 ```
 
 ---
 
-## Model Details
+## Limitations
 
-| Parameter | Value |
-|---|---|
-| Architecture | EfficientNetB3 |
-| Input Size | 300 × 300 × 3 |
-| Output Classes | 38 |
-| Preprocessing | `efficientnet.preprocess_input` (scales to [-1, 1]) |
-| Optimizer | Adam (lr=1e-3) |
-| Best Val Accuracy | **96.50%** (Epoch 11/15) |
-| Training Strategy | Transfer Learning — frozen base, custom head |
-
-### Supported Crops & Diseases
-
-| Crop | Diseases Covered |
-|---|---|
-| Apple | Apple Scab, Black Rot, Cedar Apple Rust, Healthy |
-| Blueberry | Healthy |
-| Cherry | Powdery Mildew, Healthy |
-| Corn (Maize) | Cercospora Leaf Spot, Common Rust, Northern Leaf Blight, Healthy |
-| Grape | Black Rot, Esca (Black Measles), Leaf Blight, Healthy |
-| Orange | Huanglongbing (Citrus Greening) |
-| Peach | Bacterial Spot, Healthy |
-| Pepper (Bell) | Bacterial Spot, Healthy |
-| Potato | Early Blight, Late Blight, Healthy |
-| Raspberry | Healthy |
-| Soybean | Healthy |
-| Squash | Powdery Mildew |
-| Strawberry | Leaf Scorch, Healthy |
-| Tomato | Bacterial Spot, Early Blight, Late Blight, Leaf Mold, Septoria Leaf Spot, Spider Mites, Target Spot, Yellow Leaf Curl Virus, Mosaic Virus, Healthy |
+- Works best on close-up, single-leaf images (similar to how PlantVillage images look)
+- Doesn't handle multiple diseases on one leaf well
+- Real-field photos with soil/background lower confidence noticeably
+- Only covers the 14 crops in the dataset — won't generalize to other plants
 
 ---
 
-## Known Limitations
+## Notes
 
-- The model was trained on controlled lab-style images from PlantVillage. Real-world field photos (busy backgrounds, multiple leaves, poor lighting) may reduce accuracy.
-- Some visually similar diseases across different crops (e.g., Tomato Early Blight vs. Potato Early Blight) may be misclassified.
-- Blueberry, Raspberry, and Soybean classes only have "healthy" — no disease data available in the dataset.
+This was a learning project. The model performs well on clean inputs but we're aware it's not production-ready for actual farmers without more diverse training data. The full methodology, experiments, and analysis are in the project report.
 
 ---
-
-## License
-
-This project is open-source and available for educational purposes.
