@@ -1,6 +1,6 @@
 import streamlit as st
-from tensorflow.keras.models import load_model as keras_load_model
-from tensorflow.keras.applications.efficientnet import preprocess_input
+from keras.models import load_model as keras_load_model
+from keras.applications.efficientnet import preprocess_input
 import numpy as np
 import json
 from PIL import Image

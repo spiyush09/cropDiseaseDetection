@@ -28,7 +28,6 @@ The process looked roughly like this:
 2. **Freeze the base** — we didn't want to mess with the features it already learned (edges, textures, shapes — all useful for leaves too)
 3. **Add our own head** — GlobalAveragePooling → Dropout → Dense(38, softmax)
 4. **Train phase 1** — only our new layers trained, base frozen
-5. **Fine-tune phase 2** — unfroze the top layers of the base and trained with a much lower learning rate so we didn't destroy the pretrained weights
 
 This two-phase approach is pretty standard for transfer learning and it worked well here. The idea is that ImageNet features are surprisingly good for plant leaves too — the model already knows how to detect textures, spots, and color patterns, which is basically what disease detection needs.
 

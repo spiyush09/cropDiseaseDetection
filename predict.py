@@ -7,8 +7,8 @@ import sys
 import json
 import numpy as np
 import tensorflow as tf
-from tensorflow.keras.models import load_model
-from tensorflow.keras.applications.efficientnet import preprocess_input  # fixed: consistent import
+from keras.models import load_model
+from keras.applications.efficientnet import preprocess_input
 from PIL import Image
 
 MODEL_PATH   = 'models/plant_disease_model.keras'
