@@ -173,8 +173,7 @@ The Streamlit app (`app.py`) provides:
 
 ## 9. Future Improvements
 
-- Fine-tune the top layers of EfficientNetB3 (Phase 2 training) for additional accuracy gain
-- Collect and augment real-world field images to improve robustness
+- Fine-tune the top layers of EfficientNetB3 (Phase 2 training) for additional accuracy gain — not completed in this version, base model remains fully frozen- Collect and augment real-world field images to improve robustness
 - Add treatment and pesticide recommendation database linked to detected disease
 - Deploy as a mobile app for offline field use
 - Add Grad-CAM visualisation to highlight which part of the leaf triggered the prediction

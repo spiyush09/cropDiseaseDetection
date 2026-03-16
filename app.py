@@ -21,15 +21,15 @@ st.markdown("""
     --ink:       #0e0e0e;
     --paper:     #f5f0e8;
     --cream:     #ede8dc;
-    --sage:      #4a6741;
-    --sage-light:#6b8f62;
+    --sage:      #2d5a27;
+    --sage-light:#3d7a35;
     --sage-pale: #d4e3d1;
     --rust:      #c0392b;
     --rust-pale: #f5d5d2;
-    --gold:      #b8860b;
+    --gold:      #8a6200;
     --gold-pale: #f5eac8;
-    --border:    #d4cfc5;
-    --muted:     #8a8478;
+    --border:    #b8b2a8;
+    --muted:     #3a3530;
 }
 html, body, [class*="css"] {
     font-family: 'DM Sans', sans-serif;
@@ -66,7 +66,7 @@ section[data-testid="stSidebar"] { display: none !important; }
 }
 .masthead-eyebrow {
     font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
+    font-size: 0.72rem;
     letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--muted);
@@ -91,9 +91,9 @@ section[data-testid="stSidebar"] { display: none !important; }
     color: var(--sage);
 }
 .masthead-sub {
-    font-size: 1rem;
-    color: var(--muted);
-    font-weight: 300;
+    font-size: 1.1rem;
+    color: #2a2520;
+    font-weight: 400;
     letter-spacing: 0.3px;
     margin-bottom: 1.8rem;
 }
@@ -125,7 +125,7 @@ section[data-testid="stSidebar"] { display: none !important; }
 }
 .stat-lbl {
     font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     color: var(--muted);
@@ -141,7 +141,7 @@ section[data-testid="stSidebar"] { display: none !important; }
 }
 .section-label {
     font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
+    font-size: 0.68rem;
     letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--muted);
@@ -174,7 +174,7 @@ section[data-testid="stSidebar"] { display: none !important; }
 }
 .guide-tag {
     font-family: 'DM Mono', monospace;
-    font-size: 0.58rem;
+    font-size: 0.65rem;
     font-weight: 500;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -183,52 +183,226 @@ section[data-testid="stSidebar"] { display: none !important; }
     display: inline-block;
     margin-bottom: 1rem;
 }
-.tag-do   { background: var(--sage-pale); color: var(--sage); }
-.tag-dont { background: var(--rust-pale); color: var(--rust); }
+.tag-do   { background: var(--sage-pale); color: #1a3d17; }
+.tag-dont { background: var(--rust-pale); color: #8a1a10; }
 .guide-col ul { list-style: none; margin: 0; padding: 0; }
 .guide-col li {
-    font-size: 0.97rem;
-    color: #555;
-    font-weight: 300;
-    padding: 0.32rem 0 0.32rem 1.2rem;
+    font-size: 1.0rem;
+    color: #1a1612;
+    font-weight: 400;
+    padding: 0.38rem 0 0.38rem 1.4rem;
     border-bottom: 1px solid #f0ece4;
     position: relative;
-    line-height: 1.4;
+    line-height: 1.5;
 }
 .guide-col li:last-child { border-bottom: none; }
-.do-col   li::before { content: "↗"; position: absolute; left: 0; color: var(--sage); font-size: 0.75rem; }
-.dont-col li::before { content: "×"; position: absolute; left: 0; color: var(--rust); font-size: 0.8rem; }
+.do-col   li::before { content: "↗"; position: absolute; left: 0; color: var(--sage); font-size: 0.8rem; }
+.dont-col li::before { content: "×"; position: absolute; left: 0; color: var(--rust); font-size: 0.85rem; }
 .guide-note {
     background: var(--gold-pale);
-    border: 1px solid #e8d898;
+    border: 1px solid #c8a830;
     border-radius: 6px;
-    padding: 0.8rem 1.1rem;
-    font-size: 0.8rem;
-    color: #7a6020;
-    line-height: 1.6;
+    padding: 0.9rem 1.2rem;
+    font-size: 0.88rem;
+    color: #5a3e00;
+    line-height: 1.7;
     font-weight: 400;
 }
-.guide-note strong { color: var(--gold); font-weight: 500; }
+.guide-note strong { color: #6a4a00; font-weight: 600; }
 
 /* ─── Upload zone ─── */
 .upload-section { padding: 2rem 2.5rem; border-bottom: 1px solid var(--border); }
-.stFileUploader > div {
-    background: white !important;
-    border: 1.5px dashed var(--border) !important;
-    border-radius: 8px !important;
-    transition: border-color 0.2s, box-shadow 0.2s !important;
-}
-.stFileUploader > div:hover {
-    border-color: var(--sage) !important;
-    box-shadow: 0 0 0 4px var(--sage-pale) !important;
-}
-[data-testid="stFileUploaderDropzone"] { padding: 1.8rem !important; }
-[data-testid="stFileUploaderDropzone"] p { color: var(--muted) !important; font-size: 0.85rem !important; }
 
-/* ─── Analyze button ─── */
+/* Full-width centered drop zone — stack filename below */
+[data-testid="stFileUploader"] {
+    display: block !important;
+    width: 100% !important;
+}
+/* Force the whole uploader wrapper to column layout so filename goes below */
+[data-testid="stFileUploader"] > div {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.6rem !important;
+}
+[data-testid="stFileUploaderDropzone"] {
+    min-height: 200px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    border: 2px dashed #2d5a27 !important;
+    border-radius: 10px !important;
+    background: #eaf3e8 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: none !important;
+    cursor: pointer !important;
+    padding: 2.5rem !important;
+    box-sizing: border-box !important;
+}
+[data-testid="stFileUploaderDropzone"]:hover {
+    border: 3px dashed #1a3d17 !important;
+    background: #dff0db !important;
+    box-shadow: 0 0 0 5px rgba(45,90,39,0.12), 0 4px 18px rgba(45,90,39,0.1) !important;
+}
+/* All text inside dropzone — dark and readable */
+[data-testid="stFileUploaderDropzone"] p,
+[data-testid="stFileUploaderDropzone"] span,
+[data-testid="stFileUploaderDropzone"] small {
+    color: #0e2a0c !important;
+}
+[data-testid="stFileUploaderDropzoneInstructions"] div span {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 1.05rem !important;
+    font-weight: 500 !important;
+    color: #0e2a0c !important;
+}
+[data-testid="stFileUploaderDropzoneInstructions"] small {
+    font-size: 0.78rem !important;
+    color: #1e4018 !important;
+    font-family: 'DM Mono', monospace !important;
+    letter-spacing: 0.5px !important;
+}
+/* Cloud icon */
+[data-testid="stFileUploaderDropzone"] svg {
+    color: #2d5a27 !important;
+    opacity: 1 !important;
+}
+/* Browse files button */
+[data-testid="stFileUploaderDropzone"] button {
+    font-family: 'DM Mono', monospace !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 1.5px !important;
+    background: white !important;
+    color: #0e2a0c !important;
+    border: 1.5px solid #2d5a27 !important;
+    border-radius: 5px !important;
+    transition: background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s !important;
+}
+[data-testid="stFileUploaderDropzone"] button:hover {
+    background: #2d5a27 !important;
+    color: white !important;
+    border-color: #1a3d17 !important;
+    box-shadow: 0 2px 10px rgba(45,90,39,0.25) !important;
+}
+
+/* ─── Streamlit expander — fix arrow text bleed, bg, overflow ─── */
+[data-testid="stExpander"] {
+    border: 1.5px solid var(--border) !important;
+    border-radius: 8px !important;
+    background: var(--paper) !important;
+    margin-bottom: 0.9rem !important;
+    overflow: hidden !important;
+    position: relative !important;
+    z-index: 0 !important;
+    contain: layout !important;
+}
+/* Header summary row */
+[data-testid="stExpander"] > details > summary,
+[data-testid="stExpander"] summary {
+    background: var(--paper) !important;
+    border-radius: 8px !important;
+    list-style: none !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+}
+[data-testid="stExpander"] summary::-webkit-details-marker { display: none !important; }
+[data-testid="stExpander"] summary::marker { display: none !important; }
+
+/* The actual header button Streamlit renders inside summary */
+[data-testid="stExpander"] summary > div,
+[data-testid="stExpander"] summary button,
+[data-testid="stExpanderToggleIcon"],
+[data-testid="stExpander"] [data-testid="stExpanderToggleIcon"] {
+    background: var(--paper) !important;
+    color: var(--ink) !important;
+}
+/* Hide the raw text node "arrow_right" / "arrow_drop_down" that leaks */
+[data-testid="stExpander"] summary span[data-testid],
+[data-testid="stExpander"] .eyJhbGciOiJIUzI1NiJ9,
+[data-testid="stExpander"] summary > div > div:first-child > span:first-child {
+    display: none !important;
+}
+/* Expander label text */
+[data-testid="stExpander"] summary p,
+[data-testid="stExpander"] summary span,
+[data-testid="stExpander"] summary label {
+    color: var(--ink) !important;
+    font-family: 'DM Mono', monospace !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.5px !important;
+    background: transparent !important;
+}
+[data-testid="stExpander"] svg {
+    color: var(--ink) !important;
+    flex-shrink: 0 !important;
+}
+/* Content area */
+[data-testid="stExpander"] > details > div,
+[data-testid="stExpander"] [data-testid="stExpanderDetails"] {
+    overflow: visible !important;
+    background: white !important;
+    position: relative !important;
+    z-index: 0 !important;
+    padding-bottom: 1.4rem !important;
+    padding-left: 0.6rem !important;
+    padding-right: 0.6rem !important;
+}
+[data-testid="stExpander"]:hover {
+    border-color: var(--sage) !important;
+    box-shadow: 0 0 0 3px rgba(45,90,39,0.08) !important;
+}
+
+/* ─── Uploaded filename — below dropzone, dark and visible ─── */
+[data-testid="stFileUploaderFileName"],
+[data-testid="stFileUploader"] [data-testid="stMarkdownContainer"] p,
+.stFileUploader [class*="uploadedFileName"],
+[data-testid="stFileUploader"] small,
+[data-testid="stFileUploader"] span:not([data-testid]) {
+    color: #1a1612 !important;
+    font-family: 'DM Mono', monospace !important;
+    font-size: 0.78rem !important;
+}
+/* File info row — styled as a neat card below the dropzone */
+[data-testid="stFileUploader"] > div > div:nth-child(2) {
+    order: 2 !important;
+    margin-top: 0 !important;
+    padding: 0.6rem 1rem !important;
+    background: white !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 6px !important;
+    color: #1a1612 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+}
+[data-testid="stFileUploader"] > div > div:nth-child(2) span,
+[data-testid="stFileUploader"] > div > div:nth-child(2) p {
+    color: #1a1612 !important;
+    font-family: 'DM Mono', monospace !important;
+    font-size: 0.8rem !important;
+}
+[data-testid="stFileUploader"] > div > div:nth-child(2) svg {
+    color: #2d5a27 !important;
+}
+/* ─── Spinner — dark text so it's visible on light bg ─── */
+[data-testid="stSpinner"] p,
+[data-testid="stSpinner"] span,
+.stSpinner p,
+.stSpinner span,
+[data-testid="stStatusWidget"] span {
+    color: #1a1612 !important;
+    font-weight: 500 !important;
+}
+[data-testid="stSpinner"] svg,
+.stSpinner svg {
+    color: #2d5a27 !important;
+    stroke: #2d5a27 !important;
+}
 .stButton > button {
     background: var(--ink) !important;
-    color: var(--paper) !important;
+    color: #ffffff !important;
     border: none !important;
     border-radius: 6px !important;
     font-family: 'DM Mono', monospace !important;
@@ -244,6 +418,7 @@ section[data-testid="stSidebar"] { display: none !important; }
 }
 .stButton > button:hover {
     background: var(--sage) !important;
+    color: #ffffff !important;
     transform: translateY(-1px) !important;
 }
 .stButton > button:active { transform: translateY(0) !important; }
@@ -283,7 +458,7 @@ section[data-testid="stSidebar"] { display: none !important; }
 
 .verdict-status {
     font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     letter-spacing: 2.5px;
     text-transform: uppercase;
     display: block;
@@ -305,20 +480,20 @@ section[data-testid="stSidebar"] { display: none !important; }
     margin-bottom: 0.2rem;
 }
 .verdict-disease-name {
-    font-size: 0.95rem;
-    color: var(--muted);
-    font-weight: 300;
+    font-size: 1.05rem;
+    color: #2a2520;
+    font-weight: 400;
     padding-left: 0.3rem;
     margin-bottom: 0.9rem;
     font-style: italic;
 }
 .verdict-desc {
-    font-size: 0.83rem;
-    color: #666;
-    font-weight: 300;
+    font-size: 0.93rem;
+    color: #1a1612;
+    font-weight: 400;
     padding-left: 0.3rem;
     margin-bottom: 1.2rem;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 /* ─── Confidence pill — dark chip, coloured text, always legible ─── */
@@ -356,7 +531,7 @@ section[data-testid="stSidebar"] { display: none !important; }
     padding: 0.75rem 1.2rem;
     border-bottom: 1px solid var(--border);
     font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
+    font-size: 0.68rem;
     letter-spacing: 2.5px;
     text-transform: uppercase;
     color: var(--muted);
@@ -366,30 +541,33 @@ section[data-testid="stSidebar"] { display: none !important; }
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 0.85rem 1.2rem;
+    padding: 0.95rem 1.2rem;
     border-bottom: 1px solid #f0ece4;
     transition: background 0.15s;
 }
 .pred-row:last-child { border-bottom: none; }
 .pred-row:hover { background: #faf8f5; }
+
+/* FIX 5: pred-rank was too faint (#b8b2a8), now darker and more visible */
 .pred-rank {
     font-family: 'Playfair Display', serif;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 700;
-    color: var(--border);
+    color: #6b6560;
     width: 1.4rem;
     flex-shrink: 0;
 }
 .pred-info { flex: 1; }
-.pred-name { font-size: 0.92rem; color: #444; font-weight: 400; margin-bottom: 5px; }
+.pred-name { font-size: 1.0rem; color: #0e0e0e; font-weight: 500; margin-bottom: 6px; }
 .pred-bar  { height: 3px; background: var(--cream); border-radius: 2px; }
 .pred-fill { height: 3px; border-radius: 2px; transition: width 0.8s ease; }
 .fill-1    { background: var(--sage); }
 .fill-2    { background: var(--sage-light); }
-.fill-3    { background: var(--sage-pale); }
+/* FIX 2: fill-3 was #d4e3d1 (sage-pale, nearly invisible on white) — now a visible mid-green */
+.fill-3    { background: #8fbc8a; }
 .pred-pct  {
     font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     font-weight: 500;
     color: var(--sage);
     min-width: 3.5rem;
@@ -410,19 +588,50 @@ section[data-testid="stSidebar"] { display: none !important; }
 }
 .footer-l {
     font-family: 'Playfair Display', serif;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--ink);
     font-style: italic;
 }
 .footer-r {
     font-family: 'DM Mono', monospace;
-    font-size: 0.58rem;
+    font-size: 0.65rem;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     color: var(--muted);
     text-align: right;
     line-height: 1.8;
+}
+
+/* ─── Diagnose a Leaf button ─── */
+.diagnose-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: #0e0e0e;
+    color: #f5f0e8 !important;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 0.75rem 1.8rem;
+    border-radius: 5px;
+    text-decoration: none !important;
+    border: 1.5px solid #0e0e0e;
+    transition: background 0.18s, border-color 0.18s, box-shadow 0.18s;
+}
+.diagnose-btn:hover {
+    background: var(--sage) !important;
+    color: #ffffff !important;
+    border-color: var(--sage) !important;
+    box-shadow: 0 4px 16px rgba(45,90,39,0.3) !important;
+    text-decoration: none !important;
+}
+.diagnose-btn:visited,
+.diagnose-btn:active,
+.diagnose-btn:focus {
+    color: #f5f0e8 !important;
+    text-decoration: none !important;
 }
 
 /* ─── Animations ─── */
@@ -502,6 +711,11 @@ st.markdown(f"""
             <span class="stat-lbl">Crops</span>
         </div>
     </div>
+    <div style="margin-top:1.8rem;">
+        <a href="#upload-anchor" class="diagnose-btn">
+            ↓ &nbsp;Diagnose a Leaf
+        </a>
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -541,11 +755,197 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+# ── Supported Crops ───────────────────────────────────────────────────────────
+st.markdown("""
+<div class="section">
+    <div class="section-label">🌱 Supported Crops</div>
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:0.9rem;">
+        <div style="background:white;padding:1.1rem 0.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.45rem;text-align:center;">
+            <span style="font-size:2rem;line-height:1">🍎</span>
+            <span style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:1px;text-transform:uppercase;color:#3a3530;">Apple</span>
+        </div>
+        <div style="background:white;padding:1.1rem 0.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.45rem;text-align:center;">
+            <span style="font-size:2rem;line-height:1">🫐</span>
+            <span style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:1px;text-transform:uppercase;color:#3a3530;">Blueberry</span>
+        </div>
+        <div style="background:white;padding:1.1rem 0.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.45rem;text-align:center;">
+            <span style="font-size:2rem;line-height:1">🍒</span>
+            <span style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:1px;text-transform:uppercase;color:#3a3530;">Cherry</span>
+        </div>
+        <div style="background:white;padding:1.1rem 0.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.45rem;text-align:center;">
+            <span style="font-size:2rem;line-height:1">🌽</span>
+            <span style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:1px;text-transform:uppercase;color:#3a3530;">Corn</span>
+        </div>
+        <div style="background:white;padding:1.1rem 0.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.45rem;text-align:center;">
+            <span style="font-size:2rem;line-height:1">🍇</span>
+            <span style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:1px;text-transform:uppercase;color:#3a3530;">Grape</span>
+        </div>
+        <div style="background:white;padding:1.1rem 0.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.45rem;text-align:center;">
+            <span style="font-size:2rem;line-height:1">🍊</span>
+            <span style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:1px;text-transform:uppercase;color:#3a3530;">Orange</span>
+        </div>
+        <div style="background:white;padding:1.1rem 0.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.45rem;text-align:center;">
+            <span style="font-size:2rem;line-height:1">🍑</span>
+            <span style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:1px;text-transform:uppercase;color:#3a3530;">Peach</span>
+        </div>
+        <div style="background:white;padding:1.1rem 0.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.45rem;text-align:center;">
+            <span style="font-size:2rem;line-height:1">🌶️</span>
+            <span style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:1px;text-transform:uppercase;color:#3a3530;">Bell Pepper</span>
+        </div>
+        <div style="background:white;padding:1.1rem 0.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.45rem;text-align:center;">
+            <span style="font-size:2rem;line-height:1">🥔</span>
+            <span style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:1px;text-transform:uppercase;color:#3a3530;">Potato</span>
+        </div>
+        <div style="background:white;padding:1.1rem 0.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.45rem;text-align:center;">
+            <span style="font-size:2rem;line-height:1">🍓</span>
+            <span style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:1px;text-transform:uppercase;color:#3a3530;">Raspberry</span>
+        </div>
+        <div style="background:white;padding:1.1rem 0.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.45rem;text-align:center;">
+            <span style="font-size:2rem;line-height:1">🫘</span>
+            <span style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:1px;text-transform:uppercase;color:#3a3530;">Soybean</span>
+        </div>
+        <div style="background:white;padding:1.1rem 0.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.45rem;text-align:center;">
+            <span style="font-size:2rem;line-height:1">🎃</span>
+            <span style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:1px;text-transform:uppercase;color:#3a3530;">Squash</span>
+        </div>
+        <div style="background:white;padding:1.1rem 0.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.45rem;text-align:center;">
+            <span style="font-size:2rem;line-height:1">🍓</span>
+            <span style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:1px;text-transform:uppercase;color:#3a3530;">Strawberry</span>
+        </div>
+        <div style="background:white;padding:1.1rem 0.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.45rem;text-align:center;">
+            <span style="font-size:2rem;line-height:1">🍅</span>
+            <span style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:1px;text-transform:uppercase;color:#3a3530;">Tomato</span>
+        </div>
+    </div>
+    <div class="guide-note">
+        <strong>Heads up:</strong> Only upload leaves from the crops listed above.
+        If you upload something else, the model will still output a result — but it'll be forced into one of these 14 categories and will almost certainly be wrong.
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+# ── Dataset Classes Expander ───────────────────────────────────────────────────
+_TH = "style=\"font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:#3a3530;text-align:left;padding:0.6rem 0.9rem;border-bottom:2px solid #b8b2a8;background:#f5f0e8;\""
+_TD = "style=\"padding:0.55rem 0.9rem;border-bottom:1px solid #c8c3b8;color:#1a1612;font-weight:400;vertical-align:middle;font-size:0.92rem;\""
+_CR = "style=\"padding:0.55rem 0.9rem;border-bottom:1px solid #c8c3b8;font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:1.5px;text-transform:uppercase;color:#2d5a27;font-weight:600;vertical-align:middle;\""
+_TC = "style=\"padding:0.55rem 0.9rem;border-bottom:1px solid #c8c3b8;text-align:center;vertical-align:middle;\""
+_BH = "style=\"display:inline-block;background:#d4e3d1;color:#1a3d17;font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:1px;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:3px;\""
+_BD = "style=\"display:inline-block;background:#f5d5d2;color:#8a1a10;font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:1px;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:3px;\""
+
+def _row(crop, condition, badge_style, badge_label):
+    if crop:
+        parts = crop.split(' ', 1)
+        if len(parts) == 2:
+            emoji, name = parts
+            crop_html = f"<span style='font-size:1.3rem;line-height:1;margin-right:0.4rem;vertical-align:middle;'>{emoji}</span><span style='vertical-align:middle;'>{name}</span>"
+        else:
+            crop_html = crop
+        cr = f"<td {_CR}>{crop_html}</td>"
+    else:
+        cr = f"<td {_CR}></td>"
+    return f"<tr>{cr}<td {_TD}>{condition}</td><td {_TC}><span {badge_style}>{badge_label}</span></td></tr>"
+
+def H(crop, cond): return _row(crop, cond, _BH, "Healthy")
+def D(crop, cond): return _row(crop, cond, _BD, "Disease")
+
+_rows = (
+    D("🍎 Apple",      "Apple Scab")
+  + D("",              "Black Rot")
+  + D("",              "Cedar Apple Rust")
+  + H("",              "Healthy")
+  + H("🫐 Blueberry",  "Healthy")
+  + D("🍒 Cherry",     "Powdery Mildew")
+  + H("",              "Healthy")
+  + D("🌽 Corn",       "Cercospora Leaf Spot / Gray Leaf Spot")
+  + D("",              "Common Rust")
+  + D("",              "Northern Leaf Blight")
+  + H("",              "Healthy")
+  + D("🍇 Grape",      "Black Rot")
+  + D("",              "Esca (Black Measles)")
+  + D("",              "Leaf Blight (Isariopsis Leaf Spot)")
+  + H("",              "Healthy")
+  + D("🍊 Orange",     "Huanglongbing (Citrus Greening)")
+  + D("🍑 Peach",      "Bacterial Spot")
+  + H("",              "Healthy")
+  + D("🌶️ Bell Pepper","Bacterial Spot")
+  + H("",              "Healthy")
+  + D("🥔 Potato",     "Early Blight")
+  + D("",              "Late Blight")
+  + H("",              "Healthy")
+  + H("🍓 Raspberry",  "Healthy")
+  + H("🫘 Soybean",    "Healthy")
+  + D("🎃 Squash",     "Powdery Mildew")
+  + D("🍓 Strawberry", "Leaf Scorch")
+  + H("",              "Healthy")
+  + D("🍅 Tomato",     "Bacterial Spot")
+  + D("",              "Early Blight")
+  + D("",              "Late Blight")
+  + D("",              "Leaf Mold")
+  + D("",              "Septoria Leaf Spot")
+  + D("",              "Spider Mites / Two-spotted Spider Mite")
+  + D("",              "Target Spot")
+  + D("",              "Tomato Yellow Leaf Curl Virus")
+  + D("",              "Tomato Mosaic Virus")
+  + H("",              "Healthy")
+)
+
+_expander_html = f"""
+<div style="border:1px solid #b8b2a8;border-radius:8px;overflow:hidden;margin-bottom:0.9rem;">
+<table style="width:100%;border-collapse:collapse;font-size:0.82rem;">
+<thead><tr>
+  <th {_TH} style="width:22%;font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;color:#3a3530;text-align:left;padding:0.5rem 0.8rem;border-bottom:2px solid #b8b2a8;background:#f5f0e8;">Crop</th>
+  <th {_TH} style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;color:#3a3530;text-align:left;padding:0.5rem 0.8rem;border-bottom:2px solid #b8b2a8;background:#f5f0e8;">Detectable Condition</th>
+  <th {_TH} style="width:12%;text-align:center;font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;color:#3a3530;padding:0.5rem 0.8rem;border-bottom:2px solid #b8b2a8;background:#f5f0e8;">Type</th>
+</tr></thead>
+<tbody>{_rows}</tbody>
+</table>
+</div>
+<div style="background:#f5eac8;border:1px solid #c8a830;border-radius:6px;padding:0.8rem 1.1rem;font-size:0.8rem;color:#5a3e00;line-height:1.6;">
+  <strong style="color:#6a4a00;">Note:</strong>
+  Orange has <strong>no healthy class</strong> — a healthy orange leaf will always return a disease result.
+  Blueberry, Raspberry, and Soybean have <strong>no disease classes</strong> — they can only be identified as healthy.
+  Squash has no healthy class either, only Powdery Mildew.
+</div>
+"""
+
+with st.expander("📋  What can this model predict? — See all 38 classes"):
+    st.markdown(_expander_html, unsafe_allow_html=True)
+
+# FIX 4: Replaced fragile setTimeout JS with a MutationObserver so the arrow
+# text fix survives Streamlit re-renders triggered by user interaction
+st.markdown("""
+<script>
+(function fixExpander() {
+    function clean() {
+        document.querySelectorAll('[data-testid="stExpander"] summary').forEach(function(summary) {
+            summary.childNodes.forEach(function(node) {
+                if (node.nodeType === 3 && node.textContent.trim().length > 0) {
+                    node.textContent = '';
+                }
+            });
+        });
+    }
+    clean();
+    var observer = new MutationObserver(function() { clean(); });
+    observer.observe(document.body, { childList: true, subtree: true });
+})();
+</script>
+""", unsafe_allow_html=True)
+
+st.markdown("<div style='height:1rem;'></div>", unsafe_allow_html=True)
+
 # ── Upload ─────────────────────────────────────────────────────────────────────
-st.markdown('<div class="upload-section"><div class="section-label" style="font-family:\'DM Mono\',monospace;font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;color:#8a8478;margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem;">🔬 Upload Leaf Image<span style="flex:1;height:1px;background:#d4cfc5;display:block"></span></div>', unsafe_allow_html=True)
+st.markdown("""
+<div class="upload-section" id="upload-anchor">
+    <div style="text-align:center;margin-bottom:1.6rem;">
+        <div style="font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:900;color:#0e0e0e;letter-spacing:-0.5px;margin-bottom:0.5rem;">Upload a <em style="color:#2d5a27;font-style:italic;">Leaf</em> Photo</div>
+        <div style="font-size:1.05rem;color:#1a1612;font-weight:400;letter-spacing:0.2px;">Close-up · Single leaf · Good lighting · No filters</div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
 uploaded_file = st.file_uploader(
-    "Drop a leaf image here or click to browse",
+    "Drop image here",
     type=["jpg", "jpeg", "png", "webp", "bmp", "tiff", "gif", "avif"],
     help="Upload a clear, well-lit photo of a single crop leaf",
     label_visibility="collapsed"
@@ -553,9 +953,11 @@ uploaded_file = st.file_uploader(
 
 if uploaded_file is not None:
     img = Image.open(uploaded_file).convert("RGB")
-    col_img, _ = st.columns([1, 1])
-    with col_img:
-        st.image(img, caption="", use_container_width=True)
+    st.markdown("<div style='margin-top:1.2rem;'>", unsafe_allow_html=True)
+    # FIX 3: was st.columns([1,1]) which put image in left half only.
+    # Now uses full width so image is properly centered and larger on all screen sizes.
+    st.image(img, caption="", use_container_width=True)
+    st.markdown("</div>", unsafe_allow_html=True)
     analyze = st.button("ANALYZE LEAF", type="primary", use_container_width=True)
 else:
     analyze = False
@@ -574,7 +976,7 @@ if uploaded_file is not None and analyze:
             preds      = model.predict(img_array, verbose=0)[0]
             top3_idx   = np.argsort(preds)[::-1][:3]
             confidence = float(preds[top3_idx[0]])
-            label      = idx_to_class.get(top3_idx[0], "Unknown")
+            label      = idx_to_class.get(int(top3_idx[0]), "Unknown")
             is_healthy = "healthy" in label.lower()
 
             parts = label.split("___")
@@ -622,7 +1024,9 @@ if uploaded_file is not None and analyze:
         fill_classes = ["fill-1", "fill-2", "fill-3"]
         rows_html = ""
         for i, idx in enumerate(top3_idx):
-            name  = idx_to_class.get(idx, "Unknown")
+            # FIX 1: cast to int() so dict lookup never silently returns "Unknown"
+            # on numpy int64 vs Python int mismatch across library versions
+            name  = idx_to_class.get(int(idx), "Unknown")
             parts = name.split("___")
             display = (f"{parts[0].replace('_',' ').title()} — {parts[1].replace('_',' ').title()}"
                        if len(parts) == 2 else name.replace("_", " ").title())
@@ -641,9 +1045,9 @@ if uploaded_file is not None and analyze:
         # ── Single markdown call — no leaking ──
         section_label = (
             "<div class=\"section-label\" style=\"font-family:'DM Mono',monospace;font-size:0.6rem;"
-            "letter-spacing:3px;text-transform:uppercase;color:#8a8478;margin-bottom:1rem;"
+            "letter-spacing:3px;text-transform:uppercase;color:#3a3530;margin-bottom:1rem;"
             "display:flex;align-items:center;gap:0.7rem;\">✦ Diagnosis Result"
-            "<span style=\"flex:1;height:1px;background:#d4cfc5;display:block\"></span></div>"
+            "<span style=\"flex:1;height:1px;background:#b8b2a8;display:block\"></span></div>"
         )
         top3_block = (
             '<div class="top3-card">'
@@ -655,6 +1059,21 @@ if uploaded_file is not None and analyze:
             '<div class="result-wrap">' + section_label + verdict + top3_block + '</div>',
             unsafe_allow_html=True
         )
+
+# ── Disclaimer ─────────────────────────────────────────────────────────────────
+st.markdown("""
+<div style="padding:1.5rem 2.5rem;border-top:1px solid #b8b2a8;">
+    <div style="background:#fff8e6;border:1.5px solid #e8c84a;border-left:5px solid #8a6200;border-radius:6px;padding:1.2rem 1.4rem;line-height:1.8;">
+        <span style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:#8a6200;display:block;margin-bottom:0.5rem;font-weight:600;">⚠ Disclaimer</span>
+        <span style="font-size:0.88rem;color:#2a2520;">
+        This is a <strong style="color:#0e0e0e;">student research project</strong> built for learning purposes — it is not a professional diagnostic tool.
+        The model performs well under controlled conditions but real-world accuracy can vary significantly.
+        If your crop shows signs of disease, please <strong style="color:#0e0e0e;">consult a qualified agronomist or agricultural specialist</strong> before taking any action.
+        Do not make farming or treatment decisions based solely on this tool.
+        </span>
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
 # ── Footer ─────────────────────────────────────────────────────────────────────
 st.markdown("""
